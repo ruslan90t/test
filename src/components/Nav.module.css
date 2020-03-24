@@ -1,0 +1,7 @@
+.side{
+    grid-area: s;
+    background-color: dodgerblue;
+  }
+.item a{
+    color: white;
+}
