@@ -28,4 +28,7 @@ a:hover{
   color: blue;
   opacity: 0.6;
 }
-
+.content{
+  grid-area: c;
+  background-color: royalblue;
+}
