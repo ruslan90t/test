@@ -1,19 +1,17 @@
 import React from 'react'
 import {MyPost} from './MyPost/MyPost'
 import cl from './Profile.module.css'
+import { PostBlock } from './PostBlock/PostBlock'
 
-export const Profile = () => {
+export const Profile = (props) => {
+
+
 
     return (
         <div>
-            <div>
-                <img src="http://wallpapers-image.ru/1280x800/cars/wallpapers/wallpapers-cars-09.jpg" />
-            </div>
-            <div>
-                Ava++++desc
-        </div>
-          <MyPost />
-
+            {/* компонент ждет props.postData */}
+            <PostBlock postData={props.dataDB.postData}  /> 
+            <MyPost postData={props.dataDB.postData} />
         </div>
     )
 }

@@ -5,6 +5,6 @@
 .item a{
     color: white;
 }
-.item.active a{
+.item a.active{
   color:rgb(252, 4, 4);
 }
