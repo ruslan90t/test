@@ -9,7 +9,6 @@ import { BrowserRouter, Route } from 'react-router-dom';
 function App(props) {
 
 
-
   return (
     <BrowserRouter>
       <div className="grid">
@@ -19,7 +18,9 @@ function App(props) {
           {/* <Route path='/profile' component={Profile} />
         <Route path='/dialogs' component={Dialogs} /> */}
 
-          <Route path='/profile' render={() =>  <Profile dataDB={props.state.postPage} /> } />
+          <Route path='/profile' render={() =>  <Profile dataDB={props.state.postPage} 
+                                            dispatch={props.dispatch}/>  } />
+                                              
           <Route path='/dialogs' render={() =>  <Dialogs dataDB={props.state.messPage} /> } />
         </div>
       </div>
