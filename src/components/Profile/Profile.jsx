@@ -4,12 +4,12 @@ import { MyPostContainer } from './MyPost/MyPostContainer'
 
 
 export const Profile = (props) => {
-    console.log("Profile", props);
+     //console.log("Profile", props);
     return (
         <div>
             {/* компонент ждет props.postData */}
-            <PostBlock postData={props.dataDB.postData}  /> 
-            <MyPostContainer store={props.store} dispatch={props.dispatch}/>
+            <PostBlock   /> 
+            <MyPostContainer store={props.store} />
         </div>
     )
 }

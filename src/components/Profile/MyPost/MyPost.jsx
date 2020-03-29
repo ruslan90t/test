@@ -4,7 +4,7 @@ import cl from './MyPost.module.css'
 import {clickActionCreate, updateActionCreate} from './../../../redux/postPageReducer'
 
 export const MyPost = (props) => {
-    console.log("MyPost", props);
+    // console.log("MyPost", props);
    
 
 

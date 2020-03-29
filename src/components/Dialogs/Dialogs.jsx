@@ -1,10 +1,9 @@
 import React from 'react'
 import cl from './Dialogs.module.css'
 import { NavLink } from 'react-router-dom'
-import { clickAddMessCreate, updateMessCreate } from './../../redux/messPageReducer'
 
 const DialogItem = (props) => {
-
+      
     let path = "/dialogs/" + props.id;
 
     return (
@@ -27,19 +26,19 @@ export const Dialogs = (props) => {
 
     // let dialogData = [{id: 1,name: "Артем"},{id: 2,name: "Саша"}];
     // let messData = [{id: 1,mes: "привет"},{id: 2,mes: "как дела?"}];
+    // console.log("Dialogs", props);
 
-    let dialogElem = props.dataDB.dialogData.map( (el) => ( <DialogItem name={el.name} id={el.id} /> ));
-    let messageElem = props.dataDB.messData.map( (el) => (<MessageItem mess={el.mes} />));
-    let messageTemp = props.dataDB.newMess; //значение промежуточной переменной в стате при наборе текста
+    let dialogElem = props.messPage.dialogData.map( (el) => ( <DialogItem name={el.name} id={el.id} /> ));
+    let messageElem = props.messPage.messData.map( (el) => (<MessageItem mess={el.mes} />));
+    let messageTemp = props.messPage.newMess; //значение промежуточной переменной в стате при наборе текста
 
     let onChangeMess = (e) => {
        let body = e.target.value; //обращаемся к значению элемента 
-       return props.dispatch(updateMessCreate(body));  // и передаем его параметром в функцию для изменения "messageTemp"
+       return props.updateMessCreate(body);  // и передаем его параметром в функцию для изменения "messageTemp"
     }
     let onCkickAddMess = () => {
-        return props.dispatch(clickAddMessCreate()); //даем команду запушить "messageTemp" в массив "messData"
+        return props.clickAddMessCreate(); //даем команду запушить "messageTemp" в массив "messData"
     }
-
 
     return (
         <div>

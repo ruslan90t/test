@@ -3,11 +3,11 @@ import { Header } from './components/Header/Header'
 import './App.css';
 import { Nav } from './components/Nav/Nav';
 import { Profile } from './components/Profile/Profile';
-import { Dialogs } from './components/Dialogs/Dialogs';
+import { DialogsContainer } from './components/Dialogs/DialogsContainer';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 function App(props) {
-  console.log("App", props);
+  //console.log("App", props);
 
   return (
     <BrowserRouter>
@@ -18,10 +18,9 @@ function App(props) {
           {/* <Route path='/profile' component={Profile} />
         <Route path='/dialogs' component={Dialogs} /> */}
 
-          <Route path='/profile' render={() =>  <Profile dataDB={props.state.postPage}  store={props.state}
-                                            dispatch={props.dispatch}/>  } />
+          <Route path='/profile' render={ () =>  <Profile store={props.store} />  } />
                                               
-          <Route path='/dialogs' render={() =>  <Dialogs dataDB={props.state.messPage} dispatch={props.dispatch}/> } />
+          <Route path='/dialogs' render={ () =>  <DialogsContainer store={props.store}/> } />
         </div>
       </div>
     </BrowserRouter>
