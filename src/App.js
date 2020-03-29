@@ -7,7 +7,7 @@ import { Dialogs } from './components/Dialogs/Dialogs';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 function App(props) {
-
+  console.log("App", props);
 
   return (
     <BrowserRouter>
@@ -18,7 +18,7 @@ function App(props) {
           {/* <Route path='/profile' component={Profile} />
         <Route path='/dialogs' component={Dialogs} /> */}
 
-          <Route path='/profile' render={() =>  <Profile dataDB={props.state.postPage} 
+          <Route path='/profile' render={() =>  <Profile dataDB={props.state.postPage}  store={props.state}
                                             dispatch={props.dispatch}/>  } />
                                               
           <Route path='/dialogs' render={() =>  <Dialogs dataDB={props.state.messPage} dispatch={props.dispatch}/> } />

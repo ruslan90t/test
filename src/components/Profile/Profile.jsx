@@ -1,16 +1,15 @@
 import React from 'react'
-import {MyPost} from './MyPost/MyPost'
-import cl from './Profile.module.css'
 import { PostBlock } from './PostBlock/PostBlock'
+import { MyPostContainer } from './MyPost/MyPostContainer'
 
 
 export const Profile = (props) => {
-  
+    console.log("Profile", props);
     return (
         <div>
             {/* компонент ждет props.postData */}
             <PostBlock postData={props.dataDB.postData}  /> 
-            <MyPost postData={props.dataDB.postData} newVal={props.dataDB.newVal} dispatch={props.dispatch}/>
+            <MyPostContainer store={props.store} dispatch={props.dispatch}/>
         </div>
     )
 }

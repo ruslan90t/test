@@ -25,8 +25,8 @@ const postPageReducer = (state = initialState, action) => {
             if (state.newVal != '') {
                 state.postData.push(newPost);
             }
-
             state.newVal = '';
+
             return state;
 
         default:

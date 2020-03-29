@@ -7,7 +7,6 @@ import App from './App';
 
 
 let reloadPage = (state) => {
-
     ReactDOM.render(
         <React.StrictMode>
           <App 
