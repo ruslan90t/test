@@ -21,7 +21,7 @@ function App(props) {
           <Route path='/profile' render={() =>  <Profile dataDB={props.state.postPage} 
                                             dispatch={props.dispatch}/>  } />
                                               
-          <Route path='/dialogs' render={() =>  <Dialogs dataDB={props.state.messPage} /> } />
+          <Route path='/dialogs' render={() =>  <Dialogs dataDB={props.state.messPage} dispatch={props.dispatch}/> } />
         </div>
       </div>
     </BrowserRouter>

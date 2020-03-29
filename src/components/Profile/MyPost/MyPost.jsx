@@ -1,7 +1,7 @@
 import React from 'react'
 import { PostItem } from './PostItem/PostItem'
 import cl from './MyPost.module.css'
-
+import {clickActionCreate, updateActionCreate} from './../../../redux/postPageReducer'
 
 export const MyPost = (props) => {
 
@@ -16,15 +16,13 @@ export const MyPost = (props) => {
 
     let refTest = React.createRef();
 
-    let click = () => {
-        let action = { type: 'POSTADD' };
-        props.dispatch(action);
+    let click = () => {  
+        props.dispatch(clickActionCreate());
     }
 
     let onChangePost = () => {
         let text = refTest.current.value;
-        let action = { type: 'POST-UPDATE', post: text };
-        props.dispatch(action);
+        props.dispatch(updateActionCreate(text));
     }
 
     return (
