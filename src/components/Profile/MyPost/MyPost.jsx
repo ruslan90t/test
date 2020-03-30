@@ -1,14 +1,13 @@
 import React from 'react'
 import { PostItem } from './PostItem/PostItem'
 import cl from './MyPost.module.css'
-import {clickActionCreate, updateActionCreate} from './../../../redux/postPageReducer'
 
 export const MyPost = (props) => {
-    // console.log("MyPost", props);
+    //console.log("MyPost", props);
    
 
 
-    let postElem = props.postPage.postData.map((el) => (<PostItem message={el.post} likeCount={el.likeCount} />));
+    let postElem = props.postData.map((el) => (<PostItem message={el.post} likeCount={el.likeCount} />));
 
     let refTest = React.createRef();
 
@@ -26,7 +25,7 @@ export const MyPost = (props) => {
             My posts
             <div>
                 <textarea onChange={onChangePost}
-                    value={props.postPage.newVal}
+                    value={props.newVal}
                     ref={refTest} />
             </div>
             <div>

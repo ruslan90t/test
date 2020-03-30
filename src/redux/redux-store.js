@@ -10,6 +10,6 @@ let reducers = combineReducers({
     sidebar: sidebarReducer
 })
 
-const store = createStore(reducers);
+const store = createStore(reducers); //создаем store средствами библиотеки redux
 
 export default store;

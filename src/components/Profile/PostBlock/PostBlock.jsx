@@ -1,5 +1,4 @@
 import React from 'react'
-import cl from './PostBlock.module.css'
 
 export const PostBlock = (props) => {
 

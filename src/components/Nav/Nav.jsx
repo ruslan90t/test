@@ -13,9 +13,15 @@ export const Nav = () => {
                 <li className={cl.item}>
                     <NavLink to="/dialogs" activeClassName={cl.active}>Контакты</NavLink>
                 </li>
-                <li className={cl.item}><a href="#">Стратегия</a></li>
-                <li className={cl.item}><a href="#">О компании</a></li>
-                <li className={cl.item}><a href="#">Справка</a></li>
+                <li className={cl.item}>
+                <NavLink to="/strategy" activeClassName={cl.active}>Стратегия</NavLink>
+                    </li>
+                <li className={cl.item}>
+                <NavLink to="/about" activeClassName={cl.active}>О компании</NavLink>
+                    </li>
+                <li className={cl.item}>
+                <NavLink to="/spravka" activeClassName={cl.active}>Справка</NavLink>
+                    </li>
             </ul>
         </div>
     )

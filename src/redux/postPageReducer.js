@@ -11,24 +11,26 @@ let initialState = {
 const postPageReducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case POST_UPDATE:
-
-            state.newVal = action.post;
-            return state;
-
-        case POSTADD:
+        case POST_UPDATE: {
+            let stateCopy = { ...state };
+            stateCopy.newVal = action.post;
+            return stateCopy;
+        }
+        case POSTADD: {
+            let stateCopy = { ...state };
             let newPost = {
                 id: 3,
                 post: state.newVal,
                 likeCount: 0
             };
-            if (state.newVal != '') {
-                state.postData.push(newPost);
+            
+            stateCopy.postData = [...state.postData];
+            if (stateCopy.newVal != '') {
+                stateCopy.postData.push(newPost);
             }
-            state.newVal = '';
-
-            return state;
-
+            stateCopy.newVal = '';
+            return stateCopy;
+        }
         default:
             return state;
     }
@@ -36,10 +38,10 @@ const postPageReducer = (state = initialState, action) => {
 
 export const clickActionCreate = () => {
     return { type: POSTADD };
- }
+}
 export const updateActionCreate = (text) => {
-    let action = {type: POST_UPDATE, post: text};
+    let action = { type: POST_UPDATE, post: text };
     return action;
- }
+}
 
 export default postPageReducer;

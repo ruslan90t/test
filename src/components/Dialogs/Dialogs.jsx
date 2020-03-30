@@ -23,7 +23,7 @@ const MessageItem = (props) => {
 }
 
 export const Dialogs = (props) => {
-
+    //console.log("Dialogs", props);
     // let dialogData = [{id: 1,name: "Артем"},{id: 2,name: "Саша"}];
     // let messData = [{id: 1,mes: "привет"},{id: 2,mes: "как дела?"}];
     // console.log("Dialogs", props);
@@ -36,7 +36,7 @@ export const Dialogs = (props) => {
        let body = e.target.value; //обращаемся к значению элемента 
        return props.updateMessCreate(body);  // и передаем его параметром в функцию для изменения "messageTemp"
     }
-    let onCkickAddMess = () => {
+    let onClickAddMess = () => {
         return props.clickAddMessCreate(); //даем команду запушить "messageTemp" в массив "messData"
     }
 
@@ -53,9 +53,10 @@ export const Dialogs = (props) => {
                         value={ messageTemp }
               
                    ></textarea></div>
-                   <div><button onClick={ onCkickAddMess } >Send</button></div>
+                   <div><button onClick={ onClickAddMess } >Send</button></div>
                 </div>
             </div>
         </div>
     );
 }
+
