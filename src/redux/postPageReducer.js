@@ -8,7 +8,7 @@ let initialState = {
     newVal: ''
 }
 //если нет state, используем значение по умолчанию state = initialState
-const postPageReducer = (state = initialState, action) => {
+const postPageReducer = (state = initialState, action) => {  //тут state == state.messPage из диалог.контейнера
 
     switch (action.type) {
         case POST_UPDATE: {

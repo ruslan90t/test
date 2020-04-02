@@ -28,8 +28,8 @@ export const Dialogs = (props) => {
     // let messData = [{id: 1,mes: "привет"},{id: 2,mes: "как дела?"}];
     // console.log("Dialogs", props);
 
-    let dialogElem = props.messPage.dialogData.map( (el) => ( <DialogItem name={el.name} id={el.id} /> ));
-    let messageElem = props.messPage.messData.map( (el) => (<MessageItem mess={el.mes} />));
+    let dialogElem = props.messPage.dialogData.map( el => ( <DialogItem name={el.name} id={el.id} key={el.id} />));
+    let messageElem = props.messPage.messData.map( el => (<MessageItem mess={el.mes} key={el.id} />));
     let messageTemp = props.messPage.newMess; //значение промежуточной переменной в стате при наборе текста
 
     let onChangeMess = (e) => {

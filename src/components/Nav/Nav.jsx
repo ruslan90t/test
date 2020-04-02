@@ -8,19 +8,19 @@ export const Nav = () => {
         <div className={cl.side}>
             <ul>
                 <li className={cl.item}>
-                    <NavLink to="/profile" activeClassName={cl.active}>О нас</NavLink>
+                    <NavLink to="/profile" activeClassName={cl.active}>Профиль</NavLink>
                 </li>
                 <li className={cl.item}>
-                    <NavLink to="/dialogs" activeClassName={cl.active}>Контакты</NavLink>
+                    <NavLink to="/dialogs" activeClassName={cl.active}>Сообщения</NavLink>
                 </li>
                 <li className={cl.item}>
-                <NavLink to="/strategy" activeClassName={cl.active}>Стратегия</NavLink>
+                <NavLink to="/users" activeClassName={cl.active}>Пользователи</NavLink>
                     </li>
                 <li className={cl.item}>
-                <NavLink to="/about" activeClassName={cl.active}>О компании</NavLink>
+                <NavLink to="/about" activeClassName={cl.active}>Музыка</NavLink>
                     </li>
                 <li className={cl.item}>
-                <NavLink to="/spravka" activeClassName={cl.active}>Справка</NavLink>
+                <NavLink to="/spravka" activeClassName={cl.active}>Настройки</NavLink>
                     </li>
             </ul>
         </div>

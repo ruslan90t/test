@@ -1,7 +1,7 @@
 import { clickAddMessCreate, updateMessCreate } from '../../redux/messPageReducer'
 import { Dialogs } from './Dialogs'
 import { connect } from 'react-redux';
-
+import React from 'react';
 
 
 let mapStateToProps = (state) => {
