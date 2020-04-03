@@ -7,7 +7,7 @@ export const MyPost = (props) => {
    
 
 
-    let postElem = props.postData.map((el) => (<PostItem message={el.post} likeCount={el.likeCount} />));
+    let postElem = props.postData.map((el) => (<PostItem message={el.post} likeCount={el.likeCount} key={el.id}/>));
 
     let refTest = React.createRef();
 

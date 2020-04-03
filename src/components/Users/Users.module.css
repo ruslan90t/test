@@ -7,3 +7,9 @@ img{
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
 }
+.selectedPage{
+    font-weight: bold;
+}
+span:hover{
+    cursor: pointer;
+}
