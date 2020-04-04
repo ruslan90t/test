@@ -9,7 +9,8 @@ let reducers = combineReducers({
     postPage: postPageReducer,
     messPage: messPageReducer,
     sidebar: sidebarReducer,
-    usersPage: usersReducer
+    usersPage: usersReducer,
+   
 })
 
 const store = createStore(reducers); //создаем store средствами библиотеки redux
