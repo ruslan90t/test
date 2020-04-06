@@ -1,14 +1,15 @@
 import React from 'react';
 import cl from './Users.module.css';
 import userPhoto from '../../assets/img/kristallTreid.png';
+import { NavLink } from 'react-router-dom';
 
 export const UserRend = (props) => {
-    let res = Math.ceil(props.totalCount / props.pageSize); //округляем в большую сторону, чтоб не укорачивались страницы при делении с остатком
+    //let res = Math.ceil(props.totalCount / props.pageSize); //округляем в большую сторону, чтоб не укорачивались страницы при делении с остатком
     let sum = [];
-    for (let i = 1; i <= res; i++) {
+    for (let i = 1; i <= 6; i++) {
         sum.push(i);
     }
-    console.log("UserRend", props);
+    //console.log("UserRend", props);
     return (
         <div>
 
@@ -22,7 +23,9 @@ export const UserRend = (props) => {
                 props.users.map(u => <div key={u.id}> <span>
                     <div>
                         {/* {u.photos.large || u.photos.small ? alert('1') : true} */}
-                        <img src={u.photos.large ? u.photos.large : `${userPhoto}`} />
+                        <NavLink to={'/profile/' + u.id} >
+                            <img className={cl.user} src={u.photos.large ? u.photos.large : `${userPhoto}`} />
+                        </NavLink>
                     </div>
                     <div>
                         {/* вызываем функции, переданные в userReducer под соответствующими названиями полей */}

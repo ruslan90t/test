@@ -2,10 +2,11 @@ import React from 'react';
 import { Header } from './components/Header/Header'
 import './App.css';
 import { Nav } from './components/Nav/Nav';
-import { Profile } from './components/Profile/Profile';
 import { DialogsContainer } from './components/Dialogs/DialogsContainer';
 import { Route } from 'react-router-dom';
 import UsersContainer from './components/Users/UsersContainer';
+import ProfileContainer from './components/Profile/ProfileContainer';
+import HeaderContainer from './components/Header/HeaderContainer';
 
 function App(props) {
   //console.log("App", props);
@@ -14,17 +15,17 @@ function App(props) {
     
     
       <div className="grid">
-        <Header />
+       <HeaderContainer />
         <Nav />
         <div className="content">
           {/* <Route path='/profile' component={Profile} />
         <Route path='/dialogs' component={Dialogs} /> */}
 
-          <Route path='/profile' render={ () =>  <Profile store={props.store} />  } />
+          <Route path='/profile/:userId?' render={ () =>  <ProfileContainer  />  } />
                                               
-          <Route path='/dialogs' render={ () =>  <DialogsContainer store={props.store}/> } />
+          <Route path='/dialogs' render={ () =>  <DialogsContainer /> } />
 
-          <Route path='/users' render={ () =>  <UsersContainer store={props.store}/> } />
+          <Route path='/users' render={ () =>  <UsersContainer /> } />
         </div>
       </div>
   );

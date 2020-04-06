@@ -1,11 +1,14 @@
 const POST_UPDATE = 'POST-UPDATE';
 const POSTADD = 'POSTADD';
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
+
 
 
 //инициализируем начальное состояние
 let initialState = {
     postData: [{ id: 1, post: "Hi! How are you?", likeCount: 20 }, { id: 2, post: "This is my first post", likeCount: 12 }],
-    newVal: ''
+    newVal: '',
+    profile: null
 }
 //если нет state, используем значение по умолчанию state = initialState
 const postPageReducer = (state = initialState, action) => {  //тут state == state.messPage из диалог.контейнера
@@ -31,6 +34,13 @@ const postPageReducer = (state = initialState, action) => {  //тут state == s
             stateCopy.newVal = '';
             return stateCopy;
         }
+
+        case SET_USER_PROFILE: {
+            return {
+                ...state, 
+                profile: action.val
+            }
+        }
         default:
             return state;
     }
@@ -43,5 +53,6 @@ export const updateActionCreate = (text) => {
     let action = { type: POST_UPDATE, post: text };
     return action;
 }
+export const setUserProfileAC = (val) => ({ type: SET_USER_PROFILE, val})
 
 export default postPageReducer;

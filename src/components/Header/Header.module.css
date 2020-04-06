@@ -3,11 +3,17 @@
     background-color: seagreen;
   }
 .logo{
-    width: 100px;
     height: 100px;
+    display: flex;
+    justify-content: space-between;
     }
 .logo img{
       width: 55px;
       height: 55px;
       margin-left: 50px;
     }
+
+.login{
+  color: white;
+  padding-right: 50px;
+}

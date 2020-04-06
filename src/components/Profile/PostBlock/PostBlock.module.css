@@ -2,4 +2,13 @@ img{
     width: 100%;
     object-fit: cover;
     height: 300px;
-  }
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    -ms-border-radius: 0px;
+    -o-border-radius: 0px;
+}
+.ava{
+    width: 200px;
+    height: 200px;
+}

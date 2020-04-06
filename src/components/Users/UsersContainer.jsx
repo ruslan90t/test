@@ -72,10 +72,11 @@ let mapStateToProps = (state) => {
     }
 }
 //обращение из компоненты будет к follow, unfollow,setUsers -> они передадутся в пропсах
-let mapDispatchToProps = (dispatch) => {
-
-    return {
-        follow: (userId) => {
+/* заменяем на короткую схему. передаем ссылки на реальный объект с actionCreate    |
+let mapDispatchToProps = (dispatch) => {                                            |
+                                                                                    |
+    return {                                                                        |
+        follow: (userId) => {                                                       v
             dispatch(followAC(userId));
         },
         unfollow: (userId) => {
@@ -96,5 +97,14 @@ let mapDispatchToProps = (dispatch) => {
         }
     }
 }
+*/
+export default connect(mapStateToProps, {
+    follow: followAC,
+    unfollow: unfollowAC,
+    //для показа пользователей сразу, при заходе на страницу. имитация нажатия кнопки
+    setUsers: setUsersAC,
+    curPage: curPageAC,
+    setTotalCount: totalCountAC,
+    setIsFetch: isFetchCA
+})(Users);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Users);
