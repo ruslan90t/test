@@ -1,23 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { followAC, unfollowAC, setUsersAC, curPageAC, isFetchCA } from '../../redux/usersReducer';
+import { followAC, unfollowAC, setUsersAC, curPageAC, isFetchCA, followingProgressAC } from '../../redux/usersReducer';
 import { totalCountAC } from './../../redux/usersReducer';
 import { UserRend } from './UserRend';
 import * as axios from 'axios'
 import { Preloader } from './../various/Preloader/Preloader';
+import { userAPI } from './../../api/api';
 
-class Users extends React.Component {
+class UsersContainer extends React.Component {
+
 
     componentDidMount() {
         // if (this.props.users.length == 0) {
+           
         this.props.setIsFetch(true);
 
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then(response => {
+        userAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
+            console.log('response', data);
                 this.props.setIsFetch(false);
-                this.props.setUsers(response.data.items);
-                console.log('data', response.data);
-                this.props.setTotalCount(response.data.totalCount);
+                this.props.setUsers(data.items);
+                this.props.setTotalCount(data.totalCount);
             });
         // }
     }
@@ -28,10 +30,10 @@ class Users extends React.Component {
         this.props.setIsFetch(true);
         this.props.curPage(numPage);
 
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${numPage}&count=${this.props.pageSize}`)
-            .then(response => {
+        userAPI.getUsers(numPage, this.props.pageSize).then(data => {
+            debugger;
                 this.props.setIsFetch(false);
-                this.props.setUsers(response.data.items);
+                this.props.setUsers(data.items);
             });
     }
     render() {
@@ -50,6 +52,7 @@ class Users extends React.Component {
                 follow={this.props.follow}
                 totalCount={this.props.totalCount}
                 pageSize={this.props.pageSize}
+                followingProgress={this.props.followingProgress}
 
             />
         </>
@@ -67,7 +70,8 @@ let mapStateToProps = (state) => {
         totalCount: state.usersPage.totalCount,
         currentPage: state.usersPage.currentPage,
         totalCount: state.usersPage.totalCount,
-        isFetch: state.usersPage.isFetch
+        isFetch: state.usersPage.isFetch,
+        followingProgress: state.usersPage.followingProgress
 
     }
 }
@@ -105,6 +109,7 @@ export default connect(mapStateToProps, {
     setUsers: setUsersAC,
     curPage: curPageAC,
     setTotalCount: totalCountAC,
-    setIsFetch: isFetchCA
-})(Users);
+    setIsFetch: isFetchCA,
+    followingProgress: followingProgressAC
+})(UsersContainer);
 

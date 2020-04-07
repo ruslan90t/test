@@ -8,8 +8,8 @@ import { setAuthAC } from './../../redux/authReducer';
 
 class HeaderContainer extends React.Component{
 
-    componentDidMount(){
-        console.log('HeaderContainer props', this.props);
+    componentDidMount(){  //в get запросе withCredentials: true идет 2-м параметром
+        console.log('HeaderContainer props', this.props);  
         axios.get('https://social-network.samuraijs.com/api/1.0/auth/me', {
             withCredentials: true
         })

@@ -4,6 +4,7 @@ const SET_USERS = 'SET_USERS';
 const CUR_PAGE = 'CUR_PAGE';
 const TOTAL_COUNT = 'TOTAL_COUNT';
 const TOGGLE_FETCH = 'TOGGLE_FETCH';
+const FOLLOWING_PROGRESS = 'FOLLOWING_PROGRESS';
 // let a = 'https://im0-tub-by.yandex.net/i?id=49f810ee067ed8d61b3657915e4c09e4&n=13',
 //     b = 'https://i.pinimg.com/originals/6e/46/0c/6e460ceb4ecf9a1574d1dc52a6a836b4.png',
 //     c = 'https://www.fabulatech.com/img/main/fabulatech-logo-1600.png',
@@ -11,10 +12,11 @@ const TOGGLE_FETCH = 'TOGGLE_FETCH';
 
 let initialState = {
     users: [],
-    pageSize: 10,
+    pageSize: 3,
     totalCount: 0,
     currentPage: 1,
-    isFetch: false
+    isFetch: false,
+    followingProgress: false
 }
 
 
@@ -56,7 +58,10 @@ const usersReducer = (state = initialState, action) => {
 
         case TOGGLE_FETCH: 
             return { ...state, isFetch: action.isFetch}
-
+            
+        case FOLLOWING_PROGRESS: 
+            return { ...state, 
+                followingProgress: action.progress}
         default:
             return state;
     }
@@ -82,5 +87,5 @@ export const totalCountAC = (count) => {
     return { type: TOTAL_COUNT, totalCount: count}
 }
 export const isFetchCA = (isFetch) => ( {type: TOGGLE_FETCH, isFetch} )
-
+export const followingProgressAC = (progress) => ( {type: FOLLOWING_PROGRESS, progress} )
 export default usersReducer;
