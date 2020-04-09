@@ -1,3 +1,8 @@
+import { usersAPI } from './../api/api';
+
+
+
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -12,7 +17,7 @@ const FOLLOWING_PROGRESS = 'FOLLOWING_PROGRESS';
 
 let initialState = {
     users: [],
-    pageSize: 3,
+    pageSize: 5,
     totalCount: 0,
     currentPage: 1,
     isFetch: false,
@@ -48,20 +53,23 @@ const usersReducer = (state = initialState, action) => {
 
         case SET_USERS:
             //склеиваем 2 массива, копию старого и новый, пришедший
+            console.log('SET_USERS');
             return { ...state, users: action.users }
 
         case CUR_PAGE:
             return { ...state, currentPage: action.currentPage }
-        case TOTAL_COUNT: 
-        
-            return { ...state, totalCount: action.totalCount}
+        case TOTAL_COUNT:
 
-        case TOGGLE_FETCH: 
-            return { ...state, isFetch: action.isFetch}
-            
-        case FOLLOWING_PROGRESS: 
-            return { ...state, 
-                followingProgress: action.progress}
+            return { ...state, totalCount: action.totalCount }
+
+        case TOGGLE_FETCH:
+            return { ...state, isFetch: action.isFetch }
+
+        case FOLLOWING_PROGRESS:
+            return {
+                ...state,
+                followingProgress: action.progress
+            }
         default:
             return state;
     }
@@ -84,8 +92,27 @@ export const curPageAC = (curPage) => {
     return { type: CUR_PAGE, currentPage: curPage }
 }
 export const totalCountAC = (count) => {
-    return { type: TOTAL_COUNT, totalCount: count}
+    return { type: TOTAL_COUNT, totalCount: count }
 }
-export const isFetchCA = (isFetch) => ( {type: TOGGLE_FETCH, isFetch} )
-export const followingProgressAC = (progress) => ( {type: FOLLOWING_PROGRESS, progress} )
+export const isFetchCA = (isFetch) => ({ type: TOGGLE_FETCH, isFetch })
+export const followingProgressAC = (progress) => ({ type: FOLLOWING_PROGRESS, progress })
+
+
+export const getUsersThunkCreator = (currentPage, pageSize) => {
+    return (dispatch) => {
+
+        dispatch(isFetchCA(true));
+
+        usersAPI.getUsers(currentPage, pageSize).then(data => {
+
+            dispatch(setUsersAC(data.items));
+            console.log('getUsersThunk-responce', data);
+            dispatch(curPageAC(currentPage));
+            dispatch(isFetchCA(false));
+            dispatch(totalCountAC(data.totalCount));
+        });
+    }
+}
+
+
 export default usersReducer;

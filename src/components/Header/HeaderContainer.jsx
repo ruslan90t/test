@@ -2,26 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as axios from 'axios'
 import { Header } from './Header';
-import { setAuthAC } from './../../redux/authReducer';
+import { setAuthAC, getAuth } from './../../redux/authReducer';
+import { authAPI } from './../../api/api';
 
 
 
 class HeaderContainer extends React.Component{
 
     componentDidMount(){  //в get запросе withCredentials: true идет 2-м параметром
-        console.log('HeaderContainer props', this.props);  
-        axios.get('https://social-network.samuraijs.com/api/1.0/auth/me', {
-            withCredentials: true
-        })
-        .then(response => {
-           if(response.data.resultCode === 0){
-               let { id, email, login } = response.data.data;
-            this.props.setAuthAC(id, email, login);
-            console.log('HeaderContainer', response);
-           }
-            
-           
-        });
+        //console.log('HeaderContainer props', this.props);  
+  this.props.getAuth();
     }
 
 
@@ -36,4 +26,7 @@ let mapStateToProps = (state) => ({
     login: state.auth.login
 });
 
-export default connect(mapStateToProps, { setAuthAC } )(HeaderContainer);
+export default connect(mapStateToProps, 
+    //{ setAuthAC },
+    { getAuth }
+     )(HeaderContainer);

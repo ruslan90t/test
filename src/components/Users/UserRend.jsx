@@ -3,6 +3,7 @@ import cl from './Users.module.css';
 import userPhoto from '../../assets/img/kristallTreid.png';
 import { NavLink } from 'react-router-dom';
 import * as axios from 'axios'
+import { usersAPI } from './../../api/api';
 
 export const UserRend = (props) => {
     console.log('UserRend', props);
@@ -16,7 +17,7 @@ export const UserRend = (props) => {
         <div>
 
             {sum.map(o => {
-                return <span onClick={() => { props.setCurPage(o) }}
+                return <span onClick={() => { props.setCurPage(o); console.log("o", o) }}
                     className={(props.currentPage === o) && (cl.selectedPage)}>{o}</span>
             })}
             
@@ -34,12 +35,13 @@ export const UserRend = (props) => {
                         {u.follow
                             ? <button onClick={() => {  //в delete запросе withCredentials: true идет 2-м параметром
                                 props.followingProgress(true);
-                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
-                                    withCredentials: true,
-                                    headers: {
-                                        'API-KEY': '40032642-32d2-49fc-be33-3e427fdb928c'
-                                    }
-                                })
+                                // axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+                                //     withCredentials: true,
+                                //     headers: {
+                                //         'API-KEY': '40032642-32d2-49fc-be33-3e427fdb928c'
+                                //     }
+                                // })
+                                usersAPI.unfollow(u.id)
                                 .then(response => {
                                    if(response.data.resultCode === 0){
                                     props.unfollow(u.id);
@@ -49,12 +51,7 @@ export const UserRend = (props) => {
                              }}>Unfollow</button>
                             : <button onClick={() => {  //в post запросе withCredentials: true идет 3-м параметром
                                 props.followingProgress(true);
-                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{}, {
-                                    withCredentials: true,
-                                    headers: {
-                                        'API_KEY': '40032642-32d2-49fc-be33-3e427fdb928c'
-                                    }
-                                })
+                                usersAPI.follow(u.id)
                                 .then(response => {
                                     console.log("follow", response)
                                    if(response.data.resultCode === 0){

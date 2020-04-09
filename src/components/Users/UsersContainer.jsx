@@ -1,39 +1,59 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { followAC, unfollowAC, setUsersAC, curPageAC, isFetchCA, followingProgressAC } from '../../redux/usersReducer';
-import { totalCountAC } from './../../redux/usersReducer';
+import { totalCountAC, getUsersThunkCreator } from './../../redux/usersReducer';
 import { UserRend } from './UserRend';
 import * as axios from 'axios'
-import { Preloader } from './../various/Preloader/Preloader';
-import { userAPI } from './../../api/api';
+import { usersAPI } from './../../api/api';
+import { Preloader } from '../various/Preloader/Preloader'
 
 class UsersContainer extends React.Component {
 
 
     componentDidMount() {
         // if (this.props.users.length == 0) {
-           
+            
         this.props.setIsFetch(true);
+        console.log('startDidMount', this.props);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,{}, {
+            withCredentials: true,
+            headers: {
+                'API_KEY': '40032642-32d2-49fc-be33-3e427fdb928c'
+            }
+        }).then(data => {
+            this.props.setIsFetch(false);
+            this.props.setUsers(data.data.items);
+            this.props.setTotalCount(data.data.totalCount);
 
-        userAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-            console.log('response', data);
-                this.props.setIsFetch(false);
-                this.props.setUsers(data.items);
-                this.props.setTotalCount(data.totalCount);
             });
-        // }
-    }
+        // usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
+        //     console.log('UsersContainer-responce',data);
+           
+        //         this.props.setIsFetch(false);
+        //         this.props.setUsers(data.items);
+        //         this.props.setTotalCount(data.totalCount);
+        //     });
+        } 
+        //все выше переместили в getUsersThunkCreator. this.props.setIsFetch был переименован от isFetchCA(актион креатор). 
+        //там нужно диспатчить именно актион-креаторы
+        //this.props.getUsers(this.props.currentPage, this.props.pageSize);
+    
     componentDidUpdate() { }
     componentWillUnmount() { }
     setCurPage = (numPage) => {
-
+        //this.props.getUsers( numPage, this.props.pageSize);
         this.props.setIsFetch(true);
         this.props.curPage(numPage);
-
-        userAPI.getUsers(numPage, this.props.pageSize).then(data => {
-            debugger;
+        console.log('setCurPage', this.props);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${numPage}&count=${this.props.pageSize}`,{}, {
+                                    withCredentials: true,
+                                    headers: {
+                                        'API_KEY': '40032642-32d2-49fc-be33-3e427fdb928c'
+                                    }
+                                }).then(data => {
+                console.log('setCurPage-responce', data);   
                 this.props.setIsFetch(false);
-                this.props.setUsers(data.items);
+                this.props.setUsers(data.data.items);
             });
     }
     render() {
@@ -110,6 +130,7 @@ export default connect(mapStateToProps, {
     curPage: curPageAC,
     setTotalCount: totalCountAC,
     setIsFetch: isFetchCA,
-    followingProgress: followingProgressAC
+    followingProgress: followingProgressAC,
+    getUsers: getUsersThunkCreator
 })(UsersContainer);
 

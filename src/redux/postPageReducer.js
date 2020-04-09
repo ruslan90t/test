@@ -1,3 +1,6 @@
+import { usersAPI } from './../api/api';
+import * as axios from 'axios';
+
 const POST_UPDATE = 'POST-UPDATE';
 const POSTADD = 'POSTADD';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -54,5 +57,16 @@ export const updateActionCreate = (text) => {
     return action;
 }
 export const setUserProfileAC = (val) => ({ type: SET_USER_PROFILE, val})
+//thunk creator
+export const getUserProfile = (userId) => (dispatch) => {
+//диспатчим АС setUserProfileAC
+axios.get('https://social-network.samuraijs.com/api/1.0/profile/'+ userId).then(response => {     
+    dispatch(setUserProfileAC(response.data));
+});
+
+    // usersAPI.getUsersProfile(userId).then(response => {     
+    //     dispatch(setUserProfileAC(response.data));
+    // });
+}
 
 export default postPageReducer;
