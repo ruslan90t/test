@@ -6,7 +6,7 @@ import * as axios from 'axios'
 import { usersAPI } from './../../api/api';
 
 export const UserRend = (props) => {
-    console.log('UserRend', props);
+   // console.log('UserRend', props);
     //let res = Math.ceil(props.totalCount / props.pageSize); //округляем в большую сторону, чтоб не укорачивались страницы при делении с остатком
     let sum = [];
     for (let i = 1; i <= 6; i++) {

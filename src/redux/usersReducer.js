@@ -53,7 +53,7 @@ const usersReducer = (state = initialState, action) => {
 
         case SET_USERS:
             //склеиваем 2 массива, копию старого и новый, пришедший
-            console.log('SET_USERS');
+            //console.log('SET_USERS');
             return { ...state, users: action.users }
 
         case CUR_PAGE:
@@ -106,7 +106,7 @@ export const getUsersThunkCreator = (currentPage, pageSize) => {
         usersAPI.getUsers(currentPage, pageSize).then(data => {
 
             dispatch(setUsersAC(data.items));
-            console.log('getUsersThunk-responce', data);
+            //console.log('getUsersThunk-responce', data);
             dispatch(curPageAC(currentPage));
             dispatch(isFetchCA(false));
             dispatch(totalCountAC(data.totalCount));

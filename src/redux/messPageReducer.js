@@ -55,7 +55,9 @@ const messPageReducer = (state = initialState, action) => {
             // return stateCopy;
             //***************************** *///
             //аналогичная запись
-            let body = state.newMess;
+            //let body = state.newMess;
+            //теперь берем значение не из промежуточного хранилища state.newMess, а из action.newMess
+            let body = action.newMess;
             return (
                 {
                     ...state,
@@ -64,7 +66,7 @@ const messPageReducer = (state = initialState, action) => {
                     {id:3, mes: body}]
                 }
             )
-
+//теперь не нужно обновление поля state.newMess и соотетственно не нужен updateMessCreate и исходящие из этого последствия
         case MESSUPDATE:
             // stateCopy = { ...state }
             // stateCopy.newMess = action.mess;
@@ -79,14 +81,18 @@ const messPageReducer = (state = initialState, action) => {
             return state;
     }
 }
-
-export const clickAddMessCreate = () => {
-    return { type: MESSADD }
+//раньше
+// export const clickAddMessCreate = () => {
+//     return { type: MESSADD }
+//  };
+export const clickAddMessCreate = (newMess) => {
+    return { type: MESSADD , newMess}
  };
-export const updateMessCreate = (mess) => {
-    let action = {type: MESSUPDATE, mess: mess};
+ //теперь не нужно после использования библиотеки import { Field, reduxForm } from 'redux-form';
+// export const updateMessCreate = (mess) => {
+//     let action = {type: MESSUPDATE, mess: mess};
  
-       return action;
- }
+//        return action;
+//  }
 
 export default messPageReducer;

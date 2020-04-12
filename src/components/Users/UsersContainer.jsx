@@ -14,7 +14,7 @@ class UsersContainer extends React.Component {
         // if (this.props.users.length == 0) {
             
         this.props.setIsFetch(true);
-        console.log('startDidMount', this.props);
+        //console.log('startDidMount', this.props);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,{}, {
             withCredentials: true,
             headers: {
@@ -41,6 +41,7 @@ class UsersContainer extends React.Component {
     componentDidUpdate() { }
     componentWillUnmount() { }
     setCurPage = (numPage) => {
+      
         //this.props.getUsers( numPage, this.props.pageSize);
         this.props.setIsFetch(true);
         this.props.curPage(numPage);
@@ -57,7 +58,6 @@ class UsersContainer extends React.Component {
             });
     }
     render() {
-
 
         return <>
             {this.props.isFetch

@@ -1,5 +1,6 @@
-import { usersAPI } from './../api/api';
+import { usersAPI, API_KEY } from './../api/api';
 import * as axios from 'axios';
+
 
 const AUTHORIZED = 'AUTHORIZED';
 
@@ -9,20 +10,25 @@ let initialState = {
     userId: null,
     email: null,
     login: null,
-    isAuth: false
+    isAuth: false,
+    userId: null
 }
 
 const authReducer = (state = initialState, action) => {
 
     switch (action.type) {
 
-        case AUTHORIZED: 
-
+        case AUTHORIZED: {
+           // console.log('AUTHORIZED', action.data);
             return {
                 ...state,
                 ...action.data,
-                isAuth: true
+                userId:action.data.userId,
+                isAuth: true,
+                
             }
+        }
+       
 
         default:
             return state;
@@ -33,12 +39,12 @@ export const setAuthAC = (userId, email, login) => ({type: AUTHORIZED, data: {us
 export const getAuth = () => (dispatch) => {
     axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
             withCredentials: true,
-            headers: {
-                'API_KEY': '20b777e9-0551-4ac2-8698-69bffee964e9'
-            }
         }).then(response => {
+            
        if(response.data.resultCode === 0){
+         
            let { id, email, login } = response.data.data;
+       
         dispatch(setAuthAC(id, email, login));      
        }
         

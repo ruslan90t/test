@@ -32,12 +32,15 @@ let mapStateToProps = (state) => {
 }
 let mapDispatchToProps = (dispatch) => {
     return {
-        clickActionCreate: () => {
-            dispatch(clickActionCreate());
+        // clickActionCreate: () => {
+        //     dispatch(clickActionCreate());
+        // },
+        // updateActionCreate: (text) => {
+        //     dispatch(updateActionCreate(text));
+        // }
+        clickActionCreate: (newPostText) => {
+            dispatch(clickActionCreate(newPostText));
         },
-        updateActionCreate: (text) => {
-            dispatch(updateActionCreate(text));
-        }
     }
 }
 export const MyPostContainer = connect(mapStateToProps, mapDispatchToProps)( MyPost );
