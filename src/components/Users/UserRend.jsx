@@ -12,7 +12,7 @@ export const UserRend = (props) => {
     for (let i = 1; i <= 6; i++) {
         sum.push(i);
     }
-    //console.log("UserRend", props);
+    
     return (
         <div>
 

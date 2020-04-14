@@ -2,6 +2,9 @@ import React from 'react';
 import cl from './Dialogs.module.css';
 import { NavLink, Redirect } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
+import { Textarea } from '../various/FormsControls/FormsControl';
+import { requiredField, maxLengthCreator } from './../../utils/validators/validators';
+
 
 const DialogItem = (props) => {
 
@@ -67,7 +70,7 @@ let onSendMessage = (formData) => {
               
                    ></textarea></div>
                    <div><button onClick={ onClickAddMess } >Send</button></div> */}
-                    <AddMessageFormRedux onSubmit={onSendMessage} />
+                    <AddNewPostForm onSubmit={onSendMessage} />
                     {/* onSubmit при нажатии, форма передает собранные данные через onSubmit={props.handleSubmit} 
                     в родителя onSubmit={onSendMessage}(это callback родителю) где будут лежать все данные из формы*/}
                 </div>
@@ -78,16 +81,48 @@ let onSendMessage = (formData) => {
 //что-то вроде регистрации Field в системе с указанием имени 
 //store.getState().form в консоли выведет настоящее состояние формы
 //отрисовываем этот компонент
-const AddMessageForm = (props) => {
-    // стандартный пропс onSubmit={props.handleSubmit}
+const maxLengthCreator_50 = maxLengthCreator(50);
+
+let AddNewPostForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
+
             <div>
-                <Field component='textarea' name="messageBody" placeholder="Введите сообщение" />
+                {/* вариант до создания компонента Textarea
+                <Field name='newPostText'  
+                component='textarea'
+                validate={[requiredField, maxLengthCreator_10]}
+                
+                /> */}
+                <Field name='newMessageDialog'
+                    placeholder={'xxxx'}
+                    //при отрисовке компонент, используем {}, a не ''
+                    component={Textarea}
+                    validate={[requiredField, maxLengthCreator_50]}
+
+                />
             </div>
-            <div><button>Send</button></div>
+            <div>
+                <button>Добавить</button>
+            </div>
         </form>
     )
 }
-const AddMessageFormRedux = reduxForm({form: 'dialogAddMessageForm'})(AddMessageForm); //компонент, который надо обернуть контейнерной компонентой
+AddNewPostForm = reduxForm({ form: 'ProfileAddNewPostForm' })(AddNewPostForm);
+// const AddMessageForm = (props) => {
+//     // стандартный пропс onSubmit={props.handleSubmit}
+//     return (
+//         <form onSubmit={props.handleSubmit}>
+//             <div>
+//             <Field component={Textarea} 
+//              validate={[requiredField, maxLengthCreator_50]}
+//             name="messageBody" 
+//             placeholder="Введите сообщение" />
+//                 {/*было до настройки валидации <Field component='textarea' name="messageBody" placeholder="Введите сообщение" /> */}
+//             </div>
+//             <div><button>Send</button></div>
+//         </form>
+//     )
+// }
+//const AddMessageFormRedux = reduxForm({form: 'dialogAddMessageForm'})(AddMessageForm); //компонент, который надо обернуть контейнерной компонентой
 

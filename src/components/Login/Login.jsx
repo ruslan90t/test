@@ -1,11 +1,21 @@
 import React from 'react';
 import {reduxForm, Field} from 'redux-form';
+import { Input } from '../various/FormsControls/FormsControl';
+import { requiredField } from './../../utils/validators/validators';
+import { connect } from 'react-redux';
+import { login } from '../../redux/authReducer';
+import { Redirect } from 'react-router-dom';
 
-export const Login = () => {
+const Login = (props) => {
 //передаем в форму LoginForm через LoginReduxForm фнкцию onSubmit, в которую приходят данные (formData) из формы
 //по умолчанию
     const onSubmit = (formData) => {
-        console.log('onSubmit', formData);
+        props.login(formData.email, formData.password, formData.rememberMe);
+        //console.log('formData', formData);
+    }
+
+    if(props.isAuth) {
+        return <Redirect to={'/profile'} />
     }
 
     return ( <div>
@@ -15,7 +25,7 @@ export const Login = () => {
 }
 
 const LoginForm = (props) => {
-  
+ 
 //store.getState().form в консоли можно посмотреть состояние form
 //вводим данные, не жмем кнопку, и вводим store.getState().form. смотрим значения values/ 
 //можно смотреть параметры: изменен. посещен ли и т.д
@@ -23,9 +33,9 @@ const LoginForm = (props) => {
 //props.handleSubmit внутренний пропс
     return (    
         <form onSubmit={props.handleSubmit}>
-            <div><Field placeholder={'Login'} component={'input'} name={'login'}/></div>
-            <div><Field placeholder={'Password'} component={'input'} name={'Password'} /></div>
-            <div><Field type={"checkbox"} component={'input'} name={'rememberMe'} /> Запомнить меня</div>
+            <div><Field placeholder={'email'} component={Input} name={'email'} validate={[requiredField]} /></div>
+            <div><Field type={'password'} placeholder={'password'} component={Input} name={'password'} validate={[requiredField]} /></div>
+            <div><Field type={"checkbox"} component={Input} name={'rememberMe'} /> Запомнить меня</div>
             <div><button>Login</button></div>
             {/* <div><input placeholder={'Login'} /></div>
             <div><input placeholder={'Password'} /></div>
@@ -37,4 +47,10 @@ const LoginForm = (props) => {
 
 const LoginReduxForm = reduxForm({
     form: 'login' // уникальное имя в прилоге
-})(LoginForm)
+})(LoginForm);
+
+const mapStateToProps =(state) => ({
+    isAuth: state.auth.isAuth
+})
+
+export default connect(mapStateToProps, {login})(Login);

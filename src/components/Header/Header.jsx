@@ -10,7 +10,8 @@ export const Header = (props) => {
         <div className={cl.header}>
             <div className={cl.logo}>
                 <img src="https://cdn3.sportngin.com/attachments/photo/7734/8653/Spartans_2100_1300_large.png" />
-                { props.isAuth ? <div className={cl.login}> {props.login} </div>
+                { props.isAuth 
+                    ? <div className={cl.login}> {props.login} <button onClick={props.logout}>Log out</button></div>
                     : <NavLink  to='/login' className={cl.login}> Login </NavLink>
                 }
                 

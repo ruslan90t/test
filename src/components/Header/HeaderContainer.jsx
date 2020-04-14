@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as axios from 'axios'
 import { Header } from './Header';
-import { setAuthAC, getAuth } from './../../redux/authReducer';
+import { setAuthAC, getAuth, logout } from './../../redux/authReducer';
 import { authAPI } from './../../api/api';
 
 
@@ -27,6 +27,6 @@ let mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, 
-    //{ setAuthAC },
-    { getAuth }
+    //{ setAuthAC }, 
+    { getAuth, logout } //logout - thunk-creator
      )(HeaderContainer);
