@@ -9,10 +9,7 @@ import { authAPI } from './../../api/api';
 
 class HeaderContainer extends React.Component{
 
-    componentDidMount(){  //в get запросе withCredentials: true идет 2-м параметром
-        //console.log('HeaderContainer props', this.props);  
-  this.props.getAuth();
-    }
+  
 
 
 render(){
@@ -28,5 +25,5 @@ let mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, 
     //{ setAuthAC }, 
-    { getAuth, logout } //logout - thunk-creator
+    { logout } //logout - thunk-creator
      )(HeaderContainer);

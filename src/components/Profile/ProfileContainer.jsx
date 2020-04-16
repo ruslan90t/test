@@ -11,12 +11,18 @@ class ProfileContainer extends React.Component {
     componentDidMount() {
         //console.log('ProfileContainer', this.props);
       
-        
+         
         let userId = this.props.match.params.userId;
         //console.log('userId', this.props);
+        //если нет ид в урле,
         if(!userId){
-             userId = 6979;
-            //userId = 2;
+            //то показывать : 
+             //userId = 6979;
+             userId = this.props.authorizedUserId;
+            if(!userId){
+                this.props.history.push('/login'); //вызов программного редиректа
+            }
+             
         }
         this.props.getUserProfile(userId);
         this.props.getStatus(userId);
@@ -49,7 +55,8 @@ class ProfileContainer extends React.Component {
 let mapStateToProps = (state) => ({ 
     profile: state.postPage.profile,
     status: state.postPage.status,
-    
+    authorizedUserId: state.auth.userId,
+    isAuth: state.auth.isAuth 
 })
 
 //let WithRoutProfileContainer = withRouter(AuthRedirectComponent);

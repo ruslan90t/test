@@ -6,6 +6,7 @@ import { UserRend } from './UserRend';
 import * as axios from 'axios'
 import { usersAPI } from './../../api/api';
 import { Preloader } from '../various/Preloader/Preloader'
+import { getTotalCount, getPageSize, getUsers, getCurrentPage, getIsFetch, getFollowingProgress } from '../../redux/userSelectors';
 
 class UsersContainer extends React.Component {
 
@@ -79,22 +80,36 @@ class UsersContainer extends React.Component {
     }
 
 }
+//было раньше
+// let mapStateToProps = (state) => {
 
+//     return {
+//         //передается в презентационную компоненту для вызова callback с параметрами
+//         //имя props - значение из state
+//         users: state.usersPage.users,
+//         pageSize: state.usersPage.pageSize,
+//         totalCount: state.usersPage.totalCount,
+//         currentPage: state.usersPage.currentPage,
+//         isFetch: state.usersPage.isFetch,
+//         followingProgress: state.usersPage.followingProgress
+
+//     }
+// }
+//будем использовать селекторы
 let mapStateToProps = (state) => {
 
-    return {
-        //передается в презентационную компоненту для вызова callback с параметрами
-        //имя props - значение из state
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalCount: state.usersPage.totalCount,
-        currentPage: state.usersPage.currentPage,
-        totalCount: state.usersPage.totalCount,
-        isFetch: state.usersPage.isFetch,
-        followingProgress: state.usersPage.followingProgress
-
+        return {
+            //передается в презентационную компоненту для вызова callback с параметрами
+            //имя props - значение из state
+            users: getUsers(state),
+            pageSize: getPageSize(state),
+            totalCount: getTotalCount(state),
+            currentPage: getCurrentPage(state),
+            isFetch: getIsFetch(state),
+            followingProgress: getFollowingProgress(state)
+    
+        }
     }
-}
 //обращение из компоненты будет к follow, unfollow,setUsers -> они передадутся в пропсах
 /* заменяем на короткую схему. передаем ссылки на реальный объект с actionCreate    |
 let mapDispatchToProps = (dispatch) => {                                            |

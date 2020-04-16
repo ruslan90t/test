@@ -39,3 +39,9 @@ a:hover{
   top: 200px;
   left: 400px;
 }
+.formSummaryError{
+  border: 2px  solid blue;
+  padding: 5px;
+  color: yellowgreen;
+  width: 200px;
+}

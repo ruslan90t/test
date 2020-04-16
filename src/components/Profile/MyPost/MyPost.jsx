@@ -4,7 +4,6 @@ import cl from './MyPost.module.css';
 import { Field, reduxForm } from 'redux-form';
 import { requiredField, maxLengthCreator } from './../../../utils/validators/validators';
 import { Textarea } from './../../various/FormsControls/FormsControl';
-import AddForm from '../../AddForm/AddForm';
 
 //форму делать по аналогии с эти файлом
 //обязательно вызываем так валидатор
